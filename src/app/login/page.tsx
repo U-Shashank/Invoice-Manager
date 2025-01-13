@@ -32,7 +32,7 @@ const LoginPage = async () => {
                             <Label>Email</Label>
                             <Input name="email" type="email" placeholder="john@mail.com" required/>
                         </div>
-                        <SubmitButton />
+                        <SubmitButton text="Login"/>
                     </form>
                 </CardContent>
             </Card>

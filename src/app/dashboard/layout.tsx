@@ -10,13 +10,33 @@ import DashboardLinks from "@/components/DashboardLinks";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/utils/auth";
+import prisma from "@/utils/db";
+
+const getUser = async (userId: string) => {
+  const data = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      firstName: true,
+      lastName: true,
+      address: true,
+    },
+  });
+
+  if (!data?.firstName || !data.lastName || !data.address) {
+    redirect("/onboarding");
+  }
+}
 
 export default async function DashboardLayout({
   children,
 }: {
   children: ReactNode;
 }) {
-  const session = await requireUser();
+  const session = await requireUser()
+  const data = await getUser(session.user?.id as string)
+
 
   return (
     <>
