@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { signOut } from "@/utils/auth";
 import prisma from "@/utils/db";
+import { Toaster } from "@/components/ui/sonner";
 
 const getUser = async (userId: string) => {
   const data = await prisma.user.findUnique({
@@ -114,7 +115,7 @@ export default async function DashboardLayout({
           </main>
         </div>
       </div>
-      {/* <Toaster richColors closeButton theme="light" /> */}
+      <Toaster richColors closeButton theme="light" />
     </>
   );
 }
