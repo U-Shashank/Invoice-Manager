@@ -77,7 +77,7 @@ const GET = async (request: Request, { params }: {
         120,
         45
     );
-    pdf.text(`Due Date: Net ${data.dueDate}`, 120, 50);
+    pdf.text(`Due Date: Next ${data.dueDate} days`, 120, 50);
 
     // Item table header
     pdf.setFontSize(10);

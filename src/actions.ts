@@ -79,14 +79,21 @@ export const createInvoice = async (prevState: any, formData: FormData) => {
         template_variables: {
             "clientName": submission.value.clientName,
             "invoiceNumber": submission.value.invoiceNumber,
-            "dueDate": new Intl.DateTimeFormat('en-US', {
-                dateStyle: "long",
-            }).format(new Date(submission.value.dueDate)),
+            "dueDate": formatDate(submission.value.date, submission.value.dueDate),
             "totalAmount": formatCurrency({ amount: submission.value.total, currency: submission.value.currency as any }),
-            "invoiceLink": `http://localhost:3000/api/invoice/${data.id}`
-
+            "invoiceLink": `${process.env.HOSTED_URL}/api/invoice/${data.id}`
         }
-    })
+    });
+    
+    function formatDate(invoiceDate: string, daysUntilDue: number) {
+        const invoiceDateObj = new Date(invoiceDate);
+        const dueDateObj = new Date(invoiceDateObj);
+        dueDateObj.setDate(invoiceDateObj.getDate() + daysUntilDue);
+    
+        return new Intl.DateTimeFormat('en-US', {
+            dateStyle: "long",
+        }).format(dueDateObj);
+    }
 
     return redirect("/dashboard/invoices")
 }
@@ -144,7 +151,7 @@ export const editInvoice = async (prevState: any, formData: FormData) => {
                 dateStyle: "long",
             }).format(new Date(submission.value.dueDate)),
             "totalAmount": formatCurrency({ amount: submission.value.total, currency: submission.value.currency as any }),
-            "invoiceLink": `http://localhost:3000/api/invoice/${data.id}`
+            "invoiceLink": `${process.env.HOSTED_URL}/api/invoice/${data.id}`
 
         }
     })

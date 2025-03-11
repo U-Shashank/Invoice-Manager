@@ -2,6 +2,7 @@ import { CreditCard, IndianRupee, Users } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import prisma from "@/utils/db"
 import { requireUser } from "@/utils/hooks"
+import { formatCurrency } from "@/utils/currencyFormat"
 
 const getData = async (userId: string) => {
     const [data, openInvoices, paidInvoices] = await Promise.all([
@@ -42,7 +43,7 @@ const getData = async (userId: string) => {
 
 const DashboardBlocks = async () => {
     const session = await requireUser()
-    const {data, openInvoices, paidInvoices} = await getData(session.user?.id as string)
+    const { data, openInvoices, paidInvoices } = await getData(session.user?.id as string)
     return (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-8">
             <Card>
@@ -51,8 +52,13 @@ const DashboardBlocks = async () => {
                     <IndianRupee className="size-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                    <h2 className="text-2xl font-bold">{data.reduce((acc, invoice) => acc + invoice.total, 0)}</h2>
-                    <p className="text-xs text-muted-foreground">Based on the last 30 days</p>
+                    <h2 className="text-2xl font-bold">
+                        {formatCurrency({
+                            amount: data.reduce((acc, invoice) => acc + invoice.total, 0),
+                            currency: "INR",
+                        })}
+                    </h2>
+                    <p className="text-xs text-muted-foreground">Based on total volume</p>
                 </CardContent>
             </Card>
             <Card>

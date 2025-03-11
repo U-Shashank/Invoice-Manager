@@ -13,7 +13,7 @@ interface iAppProps {
 
 const InvoiceActions = ({ id, status }: iAppProps) => {
     const handleSendRemainder = () => {
-        toast.promise(fetch(`http://localhost:3000/api/email/${id}`, {
+        toast.promise(fetch(`${process.env.HOSTED_URL}/api/email/${id}`, {
             method: "POST",
             headers: {
                 'Content-Type': "application/json"
@@ -38,7 +38,7 @@ const InvoiceActions = ({ id, status }: iAppProps) => {
                     </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                    <Link href={`http://localhost:3000/api/invoice/${id}`} target="_blank">
+                    <Link href={`${process.env.HOSTED_URL}/api/invoice/${id}`} target="_blank">
                         <DownloadCloudIcon size="4" className="mr-2" /> Download Invoice
                     </Link>
                 </DropdownMenuItem>
