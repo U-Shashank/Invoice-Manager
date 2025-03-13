@@ -35,7 +35,8 @@ export const onboardUser = async (prevState: any, formData: FormData) => {
 
 export const createInvoice = async (prevState: any, formData: FormData) => {
     const session = await requireUser()
-
+    console.log(formData);
+    
     const submission = parseWithZod(formData, {
         schema: invoiceSchema
     })
@@ -100,6 +101,9 @@ export const createInvoice = async (prevState: any, formData: FormData) => {
 
 export const editInvoice = async (prevState: any, formData: FormData) => {
     const session = await requireUser()
+
+    console.log(formData);
+    
 
     const submission = parseWithZod(formData, {
         schema: invoiceSchema

@@ -46,6 +46,7 @@ const POST = async (_request: Request, {
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ error: "Failed to send email reminder" }, { status: 500 });
   }
 };
