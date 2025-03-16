@@ -88,7 +88,7 @@ const DashboardBlocks = async () => {
                 </CardHeader>
                 <CardContent>
                     <h2 className="text-2xl font-bold">+{openInvoices.length}</h2>
-                    <p className="text-xs text-muted-foreground">Invoices which haven't been paid</p>
+                    <p className="text-xs text-muted-foreground">Invoices which haven&apos;t been paid</p>
                 </CardContent>
             </Card>
         </div>
