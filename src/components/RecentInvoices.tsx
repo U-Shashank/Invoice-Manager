@@ -39,11 +39,11 @@ const RecentInvoices = async () => {
               <AvatarFallback>{item.clientName.slice(0, 2)}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-1 min-w-0">
-              <p className="text-sm font-medium leading-none">
-                {item.clientName}
+              <p className="text-sm font-medium leading-none truncate max-w-[180px] sm:max-w-[250px]">
+              {item.clientName}
               </p>
               <p className="text-sm text-muted-foreground truncate max-w-[180px] sm:max-w-[250px]">
-                {item.clientEmail}
+              {item.clientEmail}
               </p>
             </div>
             <div className="ml-auto font-medium flex items-center">
